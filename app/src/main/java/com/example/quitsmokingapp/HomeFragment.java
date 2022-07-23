@@ -192,7 +192,35 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
+    private void checkIsUserPro() {
+        String url = url_user_readone + "&user_id=1";
 
+        queue = Volley.newRequestQueue(getContext());
+        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                // disable unlock btn if user is pro
+                JSONArray arr = null;
+                try {
+                    arr = new JSONArray(response);
+                    JSONObject jObj = arr.getJSONObject(0);
+                    if (jObj.getInt("pro") == 2) {
+                        mAdView.setEnabled(false);
+                    }
+                } catch (JSONException e) {
+                    Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                Log.d("error",error.toString());
+            }
+        });
+        queue.add(request);
+    }
 
 
 }
