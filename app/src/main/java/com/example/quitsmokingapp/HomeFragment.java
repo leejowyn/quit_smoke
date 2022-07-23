@@ -57,6 +57,7 @@ public class HomeFragment extends Fragment {
 
     RequestQueue queue;
     String URL = "http://192.168.0.9/quitsmoking/user.php?email=dorae@gmail.com";
+    String url_user_readone = "http://192.168.0.9/quitsmoking/user.php?action=readOne";
     @RequiresApi(api = Build.VERSION_CODES.N)
 
     @Override
@@ -70,6 +71,7 @@ public class HomeFragment extends Fragment {
         won_minutes = view.findViewById(R.id.minutes);
 
         queue = Volley.newRequestQueue(getContext());
+
 
         StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
@@ -154,8 +156,6 @@ public class HomeFragment extends Fragment {
         queue.add(request);
 
 
-
-
         imageSlider = view.findViewById(R.id.slider_banner);
 
         List<SlideModel> slideModels = new ArrayList<>();
@@ -164,7 +164,7 @@ public class HomeFragment extends Fragment {
         slideModels.add(new SlideModel("https://2rdnmg1qbg403gumla1v9i2h-wpengine.netdna-ssl.com/wp-content/uploads/sites/3/2018/07/GettyImages-824302050-745x490.jpg","Banner 3"));
         imageSlider.setImageList(slideModels, true);
 
-        MobileAds.initialize(getActivity(), new OnInitializationCompleteListener() {
+        MobileAds.initialize(getContext(), new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
@@ -173,6 +173,7 @@ public class HomeFragment extends Fragment {
         mAdView = view.findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
+
 
         share = view.findViewById(R.id.btn_share);
         share.setOnClickListener(new View.OnClickListener() {
@@ -190,6 +191,8 @@ public class HomeFragment extends Fragment {
 
         return view;
     }
+
+
 
 
 }
