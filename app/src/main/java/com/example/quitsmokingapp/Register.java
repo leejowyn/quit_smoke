@@ -31,7 +31,7 @@ public class Register extends AppCompatActivity {
     EditText name,email,password, c_password, amt_cigarette, price_cigarette;
     Button btn_regist;
     ProgressBar loading;
-    String URL = "http://10.10.10.167/LoginRegister/register.php";
+    String URL = "http://192.168.0.9/quitsmoking/register.php";
     @RequiresApi(api = Build.VERSION_CODES.N)
 
     @Override

@@ -10,17 +10,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:paddingTop="125dp"
         android:paddingBottom="10dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:background="@color/white"
-        android:gravity="center">
+        android:background="@color/white">
 
         <ImageView
             android:id="@+id/image1"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="35dp"
             android:layout_width="wrap_content"
             android:layout_height="100dp"
             android:layout_gravity="center"
@@ -28,6 +28,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
             android:orientation="vertical">
 
             <com.google.android.material.textfield.TextInputLayout
@@ -40,9 +41,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
+                    android:textSize="20sp"
                     android:hint="Name"
                     app:boxStrokeColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -53,6 +56,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
+                    android:textSize="20sp"
                     android:hint="Email"
                     app:boxStrokeColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -67,6 +71,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
+                    android:textSize="20sp"
                     android:hint="Password"
                     app:boxStrokeColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -81,6 +86,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
+                    android:textSize="20sp"
                     android:hint="Amount of cigarette per day"
                     app:boxStrokeColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -94,6 +100,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
+                    android:textSize="20sp"
                     android:hint="Price of cigarette per day"
                     app:boxStrokeColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>

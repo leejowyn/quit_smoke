@@ -43,7 +43,7 @@ public class Login extends AppCompatActivity {
     TextView link_regist;
     ProgressBar loading;
     RequestQueue queue;
-    String URL = "http://192.168.0.9/LoginRegister/login.php";
+    String URL = "http://192.168.0.9/quitsmoking/login.php";
     @RequiresApi(api = Build.VERSION_CODES.N)
 
     GoogleSignInOptions gso;

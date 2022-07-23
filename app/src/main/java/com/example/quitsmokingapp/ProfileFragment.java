@@ -28,7 +28,7 @@ public class ProfileFragment extends Fragment {
 
     private TextView tvName, tvEmail, tvPassword, tvAmt_cigarette, tvPrice_cigarette;
     RequestQueue queue;
-    String URL = "http://10.10.10.167/quit_smoking/user.php?email=Tommy@gmail.com";
+    String URL = "http://192.168.0.9/quitsmoking/user.php?email=dorae@gmail.com";
     @RequiresApi(api = Build.VERSION_CODES.N)
 
     @Override

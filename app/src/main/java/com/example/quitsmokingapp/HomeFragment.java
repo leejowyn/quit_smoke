@@ -1,9 +1,11 @@
 package com.example.quitsmokingapp;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -17,6 +19,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.google.android.gms.ads.AdRequest;
@@ -26,7 +34,17 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -35,11 +53,108 @@ public class HomeFragment extends Fragment {
     ImageSlider imageSlider;
     AdView mAdView;
     Button share;
+    TextView timeElapsed,item_createdTimeStamp, amt_amount, won_minutes;
+
+    RequestQueue queue;
+    String URL = "http://192.168.0.9/quitsmoking/user.php?email=dorae@gmail.com";
+    @RequiresApi(api = Build.VERSION_CODES.N)
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        timeElapsed = view.findViewById(R.id.tv_timeElapsed);
+        item_createdTimeStamp = view.findViewById(R.id.tv_item_createdTimeStamp);
+        amt_amount = view.findViewById(R.id.amount);
+        won_minutes = view.findViewById(R.id.minutes);
+
+        queue = Volley.newRequestQueue(getContext());
+
+        StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+//                name.setText(response.toString());
+//                email.setText(response.toString());
+//                password.setText(response.toString());
+//                amt_cigarette.setText(response.toString());
+//                price_cigarette.setText(response.toString());
+                JSONArray arr = null;
+                try {
+                    arr = new JSONArray(response);
+                    JSONObject jObj = arr.getJSONObject(0);
+
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                    String currentDateandTime = sdf.format(new Date());
+
+                    //Convert string to date format
+                    SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                    String display = "%d days, %d hours, %d minutes, %d seconds";
+                    double cigarette_amt = 0.0;
+
+                    try {
+                        Date current = dateformat.parse(currentDateandTime);
+                        Date created_time = dateformat.parse(jObj.getString("created_time"));
+                        //Calculate days between actual return date and estimated return date (7 days)
+                        long difference = 0L, days = 0L, hours = 0L, mins = 0L, secs = 0L;
+                        long secondsInMilli = 0L, minutesInMilli = 0L, hoursInMilli = 0L, daysInMilli = 0L;
+                        difference = current.getTime() - created_time.getTime();
+                        secondsInMilli = 1000;
+                        minutesInMilli = secondsInMilli * 60;
+                        hoursInMilli = minutesInMilli * 60;
+                        daysInMilli = hoursInMilli * 24;
+
+                        days = difference / daysInMilli;
+                        difference = difference % daysInMilli;
+
+                        hours = difference / hoursInMilli;
+                        difference = difference % hoursInMilli;
+
+                        mins = difference / minutesInMilli;
+                        difference = difference % minutesInMilli;
+
+                        secs = difference / secondsInMilli;
+
+                        display = String.format(display,days, mins, hours, secs);
+                        timeElapsed.setText(display);
+
+                        int amt_cigarette = Integer.parseInt(jObj.getString("amt_cigarette"));
+                        double price_cigarette = Double.parseDouble(jObj.getString("price_cigarette"));
+
+                        double tempcigarette_amt = (double) days * amt_cigarette / 20;
+                        cigarette_amt = tempcigarette_amt * price_cigarette;
+                        amt_amount.setText(String.format("%.2f", cigarette_amt));
+
+                        int wonbackminutes = amt_cigarette * 11;
+                        won_minutes.setText(String.valueOf(wonbackminutes));
+
+                        throw new ParseException("Current Date/ Created Date converted wrongly.", 0);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                    item_createdTimeStamp.setText(jObj.getString("created_time"));
+
+                    Toast.makeText(getContext(),response,Toast.LENGTH_LONG).show();
+                } catch (JSONException e) {
+                    Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                timeElapsed.setText(error.toString());
+                item_createdTimeStamp.setText(error.toString());
+                Log.d("error",error.toString());
+                Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        queue.add(request);
+
+
+
 
         imageSlider = view.findViewById(R.id.slider_banner);
 
@@ -72,7 +187,6 @@ public class HomeFragment extends Fragment {
                 startActivity(Intent.createChooser(intent, "Share using"));
             }
         });
-
 
         return view;
     }
