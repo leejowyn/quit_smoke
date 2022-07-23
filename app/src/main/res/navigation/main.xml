@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    app:startDestination="@id/menuHome">
+
+    <fragment
+        android:id="@+id/menuHome"
+        android:name="com.example.quitsmokingapp.HomeFragment"
+        android:label="QSmoking"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/menuProfile"
+        android:name="com.example.quitsmokingapp.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/menuCommunity"
+        android:name="com.example.quitsmokingapp.CommunityFragment"
+        android:label="Community"
+        tools:layout="@layout/fragment_community" />
+    <fragment
+        android:id="@+id/menuSetting"
+        android:name="com.example.quitsmokingapp.SettingFragment"
+        android:label="Setting"
+        tools:layout="@layout/fragment_setting" />
+    <fragment
+        android:id="@+id/menuGetHelp"
+        android:name="com.example.quitsmokingapp.GetHelpFragment"
+        android:label="Get Help"
+        tools:layout="@layout/fragment_get_help" />
+
+</navigation>
