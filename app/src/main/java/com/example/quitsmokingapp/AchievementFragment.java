@@ -44,10 +44,50 @@ public class AchievementFragment extends Fragment {
 
         achievementList = new ArrayList<>();
 
-
+        LoadAchievement();
 
         return view;
     }
 
+    private void LoadAchievement(){
+        JsonArrayRequest request = new JsonArrayRequest(SHOW_ALL_USER_DATA, new Response.Listener<JSONArray>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onResponse(JSONArray array) {
+
+                for(int i=0; i < array.length(); i++){
+                    try {
+                        JSONObject object = array.getJSONObject(i);
+                        String title = object.getString("title").trim();
+                        String achievementid = object.getString("achievement_id").trim();
+                        String hint = object.getString("hint").trim();
+                        String reward = object.getString("reward").trim();
+
+                        Achievement achievement = new Achievement();
+                        achievement.setTitle(title);
+                        achievement.setAchievementid(achievementid);
+                        achievement.setHint(hint);
+                        achievement.setReward(reward);
+                        achievementList.add(achievement);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                achievementAdapter = new achievementAdapter(getContext(), achievementList);
+                recyclerView.setAdapter(achievementAdapter);
+            }
+        }, new Response.ErrorListener(){
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        requestQueue.add(request);
+
+    }
 
 }
