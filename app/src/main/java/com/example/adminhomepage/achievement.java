@@ -40,7 +40,7 @@ public class achievement extends AppCompatActivity {
         btnsubmit = findViewById(R.id.btn_submit);
     }
 
-    String URL = "http://192.168.0.108/android/connectphp.php";
+    String URL = "http://192.168.0.108/quitSmoke/connectphp.php";
     @RequiresApi(api = Build.VERSION_CODES.N)
 
     public void btnOnclick(View view) {
