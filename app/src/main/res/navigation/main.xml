@@ -20,6 +20,13 @@
         android:name="com.example.quitsmokingapp.CommunityFragment"
         android:label="Community"
         tools:layout="@layout/fragment_community" />
+
+    <fragment
+        android:id="@+id/menuAchievement"
+        android:name="com.example.quitsmokingapp.AchievementFragment"
+        android:label="Achievement"
+        tools:layout="@layout/fragment_achievement" />
+
     <fragment
         android:id="@+id/menuSetting"
         android:name="com.example.quitsmokingapp.SettingFragment"

@@ -31,10 +31,10 @@ public class IntroductoryActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-//    void navigateToSecondActivity(){
-//        finish();
-//        Intent intent = new Intent(IntroductoryActivity.this, Login.class);
-//        startActivity(intent);
-//    }
+    void navigateToSecondActivity(){
+        finish();
+        Intent intent = new Intent(IntroductoryActivity.this, Login.class);
+        startActivity(intent);
+    }
 
 }
