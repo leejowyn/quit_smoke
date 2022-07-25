@@ -50,6 +50,7 @@ public class Login extends AppCompatActivity {
     GoogleSignInClient gsc;
     ImageView googleBtn;
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +64,7 @@ public class Login extends AppCompatActivity {
 
         googleBtn = findViewById(R.id.google_btn);
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
-        gsc = GoogleSignIn.getClient(Login.this,gso);
+        gsc = GoogleSignIn.getClient(Login.this, gso);
 
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(Login.this);
         if(acct!=null){
