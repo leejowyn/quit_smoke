@@ -26,8 +26,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        noti.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, AdminNotificationSettingActivity.class));
+            }
+        });
+
+        tips.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, tips.class));
+            }
+        });
     }
 
-
-
 }
+
