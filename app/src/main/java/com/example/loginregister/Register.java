@@ -3,6 +3,7 @@ package com.example.loginregister;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -192,6 +193,8 @@ public class Register extends AppCompatActivity {
                 public void onResponse(String response) {
 
                     Toast.makeText(Register.this, response.toString(), Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(Register.this, Login.class);
+                    startActivity(intent);
 
                 }
 
