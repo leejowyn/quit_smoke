@@ -17,7 +17,7 @@ import java.util.List;
 public class HelpAdapter extends RecyclerView.Adapter<HelpAdapter.GuideVH> {
 
     private static final String TAG = "HelpAdapter";
-    List<Help> helpList;
+    final List<Help> helpList;
 
     public HelpAdapter(List<Help> helpList) {
         this.helpList = helpList;
@@ -52,8 +52,10 @@ public class HelpAdapter extends RecyclerView.Adapter<HelpAdapter.GuideVH> {
 
         private static final String TAG = "GuideVH";
 
-        ConstraintLayout expandableLayout;
-        TextView titleTextView, yearTextView, plotTextView;
+        final ConstraintLayout expandableLayout;
+        final TextView titleTextView;
+        final TextView yearTextView;
+        final TextView plotTextView;
 
         public GuideVH(@NonNull final View itemView) {
             super(itemView);
