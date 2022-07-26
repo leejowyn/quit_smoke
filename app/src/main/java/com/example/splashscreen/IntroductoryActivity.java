@@ -8,9 +8,6 @@ import android.widget.ImageView;
 
 import com.airbnb.lottie.LottieAnimationView;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 public class IntroductoryActivity extends AppCompatActivity {
 
     ImageView appName,splashImg;
